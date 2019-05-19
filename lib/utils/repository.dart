@@ -8,5 +8,6 @@ class Repository{
   final _movieProvider = MovieProvider();
 
   Future<MovieResponse> fetchNowPlaying() => _movieProvider.fetchNowPlayingMovies();
+  Future<MovieResponse> fetchUpcoming() => _movieProvider.fetchUpcomingMovies();
   Future<MovieResponse> fetchtopRated() => _movieProvider.fetchtopRated();
 }

@@ -30,12 +30,12 @@ class _TopRatedState extends State<TopRated> {
                   ),
                   viewportFraction: 0.8,
                   scale: 0.9,
-                  pagination: SwiperPagination(),
                   autoplay: true,
+                  pagination: SwiperPagination(),
                   itemCount: snapshot.data.results.length,
                   itemBuilder: (BuildContext context, int index) {
                     var bdpath = snapshot.data.results[index].backdropPath;
-                    print('judul  : ' + snapshot.data.results[index].title);
+//                    print('judul  : ' + snapshot.data.results[index].title);
 
                       return Image.network(
                           'https://image.tmdb.org/t/p/w500$bdpath',

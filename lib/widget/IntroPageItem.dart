@@ -82,7 +82,7 @@ class IntroPageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var imagenetwork = item.backdropPath;
+    var imagenetwork = item.posterPath;
 
     var image = Image.network(
       'https://image.tmdb.org/t/p/w500$imagenetwork',

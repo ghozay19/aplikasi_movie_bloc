@@ -11,7 +11,8 @@ class MovieProvider{
 
   static String nowPlaying = "/now_playing?api_key="+apiKey+"&language=en-EN&page=1&region=id";
 
-  static String upComing = "/upcoming?api_key="+apiKey+"&language=id-ID&page=1&region=id";
+//  static String upComing = "/upcoming?api_key="+apiKey+"&language=id-ID&page=1&region=id";
+  static String upComing = "/upcoming?api_key="+apiKey;
 
   static String trailerMovie = "/299534/videos?api_key="+apiKey+"&language=en-EN";
 
@@ -26,8 +27,6 @@ class MovieProvider{
   Future<MovieResponse> fetchtopRated() async{
 
     final response = await client.get(baseUrl+popularMovie);
-
-    // try{
     if (response.statusCode == 200) {
       print('response statusCode = 200')  ;
       Map jsons = jsonDecode(response.body);
@@ -53,6 +52,26 @@ class MovieProvider{
         MovieResponse movieResponse = MovieResponse.fromJson(jsons);
 
         print('nowPlaying = '+ jsons.toString());
+        return movieResponse;
+      } else {
+        throw('can not fetch data');
+      }
+  //   }catch(e){
+  //       print('Error !')
+  //   }
+
+  // }
+  } Future<MovieResponse> fetchUpcomingMovies() async{
+
+    final response = await client.get(baseUrl+upComing);
+
+    // try{
+      if (response.statusCode == 200) {
+        print('response statusCode = 200')  ;
+        Map jsons = jsonDecode(response.body);
+        MovieResponse movieResponse = MovieResponse.fromJson(jsons);
+
+        print('upcoming = '+ jsons.toString());
         return movieResponse;
       } else {
         throw('can not fetch data');

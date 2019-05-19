@@ -1,34 +1,33 @@
 import 'package:aplikasi_movie/bloc/movie_bloc.dart';
+import 'package:aplikasi_movie/model/movie_response.dart';
+import 'package:aplikasi_movie/widget/IntroPageItem.dart';
 import 'package:aplikasi_movie/widget/page_transformer.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
-import 'model/movie_response.dart';
-import 'widget/IntroPageItem.dart';
 
-class NowPlaying extends StatefulWidget {
+class Upcoming extends StatefulWidget {
   static final String routeName = '/nowPlaying';
 
   @override
-  _NowPlayingState createState() => _NowPlayingState();
+  _UpcomingState createState() => _UpcomingState();
 }
 
-class _NowPlayingState extends State<NowPlaying> {
+class _UpcomingState extends State<Upcoming> {
   @override
   void initState() {
     super.initState();
-    movieBloc.fetchNowPlaying();
-    print('init: nowPlaying');
+    movieBloc.fetchUpcoming();
+    print('init: upcoming');
   }
 
   @override
   void didChangeDependencies() {
-    print('didChangeDependencies: nowPlaying');
+    print('didChangeDependencies: upcoming');
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    print('dispose: nowPlaying');
+    print('dispose: upcoming');
     super.dispose();
   }
 
@@ -36,8 +35,9 @@ class _NowPlayingState extends State<NowPlaying> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<MovieResponse>(
-        stream: movieBloc.nowPlayingStream,
+        stream: movieBloc.upComingStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+
           if (snapshot.hasData) {
             print(snapshot.data.results[0].title);
             print(snapshot.data.results.length);
@@ -65,8 +65,9 @@ class _NowPlayingState extends State<NowPlaying> {
           } else {
             return Container(
                 padding: EdgeInsets.all(20.0),
-                child: Center(child:
-                CircularProgressIndicator()));
+//                child: Center(child:
+//                CircularProgressIndicator())
+            );
           }
         },
       ),
