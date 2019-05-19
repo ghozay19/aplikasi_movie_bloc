@@ -36,12 +36,11 @@ class IntroPageItem extends StatelessWidget {
 
   _buildTextContainer(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    var categoryText = _applyTextEffects(
+
+    var titleText = _applyTextEffects(
       translationFactor: 300.0,
       child: Text(
-
         item.title,
-
         style: textTheme.caption.copyWith(
           color: Colors.white70,
           fontWeight: FontWeight.bold,
@@ -52,7 +51,7 @@ class IntroPageItem extends StatelessWidget {
       ),
     );
 
-    var titleText = _applyTextEffects(
+    var descriptionText = _applyTextEffects(
       translationFactor: 200.0,
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0),
@@ -73,8 +72,8 @@ class IntroPageItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          categoryText,
           titleText,
+          descriptionText,
         ],
       ),
     );
@@ -82,11 +81,12 @@ class IntroPageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var imagenetwork = item.posterPath;
+    var imagenetwork = item.backdropPath == null ? "/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" : item.posterPath;
+
 
     var image = Image.network(
       'https://image.tmdb.org/t/p/w500$imagenetwork',
-      fit: BoxFit.cover,
+      fit: BoxFit.fill,
       alignment: FractionalOffset(
         0.5 + (pageVisibility.pagePosition / 3),
         0.5,

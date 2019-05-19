@@ -15,8 +15,11 @@ class _TopRatedState extends State<TopRated> {
     print('init: nowPlaying');
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Container(
         child: StreamBuilder<MovieResponse>(
             stream: movieBloc.topRatedStream,
@@ -37,10 +40,26 @@ class _TopRatedState extends State<TopRated> {
                     var bdpath = snapshot.data.results[index].backdropPath;
 //                    print('judul  : ' + snapshot.data.results[index].title);
 
-                      return Image.network(
-                          'https://image.tmdb.org/t/p/w500$bdpath',
-                        fit: BoxFit.fill,
+                      return Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          Image.network(
+                            'https://image.tmdb.org/t/p/w500$bdpath',
+                            fit: BoxFit.fill,
+                          ),
+                          Positioned(
+                            bottom: 56.0,
+                            left: 32.0,
+                            right: 32.0,
+                            child: Text(
+                              snapshot.data.results[index].title,
+                              style: textTheme.title
+                                  .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
 
+                        ],
                       );
                   },
                 );
